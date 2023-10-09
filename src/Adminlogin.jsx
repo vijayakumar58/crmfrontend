@@ -2,39 +2,39 @@ import axios from 'axios'
 import { useFormik } from 'formik'
 import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import {env} from './config'
+import { env } from './config'
 
-const Login = () => {
+const Adminlogin = () => {
     const navigate = useNavigate()
     const formik = useFormik({
-    initialValues : {
-      email : "",
-      password : ""
-    }, 
-    validate : (values) => {
-          let errors = {}
-          if(values.email === ""){
-              errors.email = "please Enter Your email"
+        initialValues : {
+          email : "",
+          password : ""
+        }, 
+        validate : (values) => {
+              let errors = {}
+              if(values.email === ""){
+                  errors.email = "please Enter Your email"
+              }
+              if(values.password === ""){
+                errors.password = "please Enter your password"
+              }
+              return errors
+        },
+        onSubmit: async (values) =>{
+          try {
+            const loginData = await axios.post(`${env.api}/adminlogin`,values);
+            if (loginData.status === 200) {
+              navigate("/AdminPortal")
+              window.localStorage.setItem("app-token",loginData.data.token)
+            } else {
+              
+            }
+          } catch (error) {
+            alert(error.response.data.message)
           }
-          if(values.password === ""){
-            errors.password = "please Enter your password"
-          }
-          return errors
-    },
-    onSubmit: async (values) =>{
-      try {
-        const loginData = await axios.post(`${env.api}/login`,values);
-        if (loginData.status === 200) {
-          navigate("/Portal")
-          window.localStorage.setItem("app-token",loginData.data.token)
-        } else {
-          
         }
-      } catch (error) {
-        alert(error.response.data.message)
-      }
-    }
-  })
+      })
   return (
     <div className="bg-gradient-primary">
     <div className="container">
@@ -52,7 +52,7 @@ const Login = () => {
                 <div className="col-lg-6">
                   <div className="p-5">
                     <div className="text-center">
-                      <h1 className="h4 text-gray-900 mb-4">Welcome To User Page !</h1>
+                      <h1 className="h4 text-gray-900 mb-4">Welcome To Admin Page !</h1>
                     </div>
                     <form className="user" onSubmit={formik.handleSubmit}>
                       <div className="form-group">
@@ -91,7 +91,7 @@ const Login = () => {
                     </form>
                     <hr />
                     <div className="text-center">
-                      <Link className="small" to="/Registerui">Create an Account!</Link>
+                      <Link className="small" to="/CreateAdminRegister">Create an Account!</Link>
                     </div>
                   </div>
                 </div>
@@ -108,4 +108,4 @@ const Login = () => {
   )
 }
 
-export default Login
+export default Adminlogin

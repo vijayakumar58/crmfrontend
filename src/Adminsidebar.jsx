@@ -1,9 +1,9 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-const Sidebar = () => {
+const Adminsidebar = () => {
   return (
-   // <!-- Sidebar -->
+    // <!-- Sidebar -->
    <ul className="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
    {/* <!-- Sidebar - Brand --> */}
@@ -19,9 +19,9 @@ const Sidebar = () => {
 
    {/* <!-- Nav Item - Dashboard --> */}
    <li className="nav-item active">
-       <Link className="nav-link" to="/Portal/Dashboard">
+       <Link className="nav-link" to="/Adminportal/Users">
            <i className="fas fa-fw fa-tachometer-alt"></i>
-           <span>Dashboard</span>
+           <span>Users</span>
        </Link>
    </li>
 
@@ -30,9 +30,9 @@ const Sidebar = () => {
 
    {/* <!-- Nav Item - Dashboard --> */}
    <li className="nav-item active">
-       <Link className="nav-link" to="/portal/Users">
+       <Link className="nav-link" to="/Adminportal/Admins">
            <i className="fas fa-fw fa-tachometer-alt"></i>
-           <span>Users</span>
+           <span>Admins</span>
        </Link>
    </li>
 </ul>
@@ -40,4 +40,4 @@ const Sidebar = () => {
   )
 }
 
-export default Sidebar
+export default Adminsidebar

@@ -9,12 +9,21 @@ import Portal from './Portal';
 import Registerui from './Registerui'
 import Users from './Users';
 import Userview from './Userview';
+import Adminlogin from './Adminlogin';
+import Createadminregister from './Createadminregister';
+import Adminportal from './Adminportal';
+import Admins from './Admins';
+import Adminview from './Adminview';
+import Editadmin from './Editadmin';
+import Createadmin from './Createadmin';
+import Mainpage from './Mainpage';
 
 function App() {
   return (
     <BrowserRouter>
     <Routes>
-      <Route path='/' element={<Login></Login>}></Route>
+      <Route path='/' element={<Mainpage></Mainpage>}></Route>
+      <Route path='/Userlogin' element={<Login></Login>}></Route>
       <Route path='/Registerui' element={<Registerui></Registerui>}></Route>
       <Route path='/Portal' element={<Portal></Portal>}>
         <Route path='Dashboard' element={<Dashboard></Dashboard>}></Route>
@@ -22,6 +31,15 @@ function App() {
         <Route path='Users/:id' element={<Userview></Userview>}></Route>
         <Route path='Users/Edit/:id' element={<Edituser></Edituser>}></Route>
         <Route path='Create-user' element={<Createuser></Createuser>}></Route>
+      </Route>
+      <Route path='/Adminlogin' element={<Adminlogin></Adminlogin>}></Route>
+      <Route path='/Createadminregister' element={<Createadminregister></Createadminregister>}></Route>
+      <Route path='/Adminportal' element={<Adminportal></Adminportal>}>
+        <Route path='Users' element={<Users></Users>}></Route>
+        <Route path='Admins' element={<Admins></Admins>}></Route>
+        <Route path='Admins/:id' element={<Adminview></Adminview>}></Route>
+        <Route path='Admins/Edit/:id' element={<Editadmin></Editadmin>}></Route>
+        <Route path='Create-admin' element={<Createadmin></Createadmin>}></Route>
       </Route>
     </Routes>
     </BrowserRouter>
