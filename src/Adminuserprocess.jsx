@@ -5,8 +5,8 @@ import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEye, faPenSquare, faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 
-const Admins = () => {
-    const [admins,setAdmins] = useState ([])
+const Adminuserprocess = () => {
+    const [adminusers,setAdminusers] = useState ([])
     const [isLoading,setLoading] = useState(false)
 
     useEffect (() => {
@@ -14,23 +14,23 @@ const Admins = () => {
     },[])
     let loadData = async () => {
         setLoading (true);
-        let admins = await axios.get(
-            `${env.api}/admins`,{
+        let adminusers = await axios.get(
+            `${env.api}/adminusers`,{
                 headers : {
                     'authorization' : window.localStorage.getItem("app-token")
                 }
             }
             );
-        setAdmins (admins.data)
+        setAdminusers (adminusers.data);
         setLoading(false);
     };
 
-    let adminDelete = async (id) => {
+    let userDelete = async (id) => {
         try {
             let ask = window.confirm("Are you sure ! Do you want Delete this Data ?");
             if (ask){
                 await axios.delete(
-                    `${env.api}/admin/${id}`,{
+                    `${env.api}/user/${id}`,{
                         headers : {
                             'authorization' : window.localStorage.getItem("app-token")
                         }
@@ -47,11 +47,11 @@ const Admins = () => {
     <div className="container-fluid">
 
     {/* <!-- Page Heading --> */}
-    <div className="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 className="h3 mb-0 text-gray-800">Admins</h1>
-        <Link to="/Adminportal/Create-Admin" className="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-            className="fas fa-download fa-sm text-white-50"></i> Create Admin</Link>
-    </div>
+    {/* <div className="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 className="h3 mb-0 text-gray-800">Users</h1>
+        <Link to="/portal/Create-User" className="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+            className="fas fa-download fa-sm text-white-50"></i> Create User</Link>
+    </div> */}
   {
     isLoading ? 
     <button className="btn btn-primary" style={{fontSize:"50px"}} type="button" disabled>
@@ -61,7 +61,7 @@ const Admins = () => {
     
     <div className="card shadow mb-4">
         <div className="card-header py-3">
-            <h6 className="m-0 font-weight-bold text-primary">Admin Data</h6>
+            <h6 className="m-0 font-weight-bold text-primary">User Data</h6>
         </div>
         <div className="card-body">
             <div className="table-responsive">
@@ -75,7 +75,8 @@ const Admins = () => {
                             <th>Age</th>
                             <th>Start date</th>
                             <th>Salary</th>
-                            <th>Action</th>
+                            <th>Status</th>
+                            <th>User Status update</th>
                         </tr>
                     </thead>
                     <tfoot>
@@ -87,25 +88,27 @@ const Admins = () => {
                             <th>Age</th>
                             <th>Start date</th>
                             <th>Salary</th>
-                            <th>Action</th>
+                            <th>Status</th>
+                            <th>User Status Update</th>
                         </tr>
                     </tfoot>
                     <tbody>
                         {
-                            admins.map((admin,index)=>{
+                            adminusers.map((adminuser,index)=>{
                                   return (
                         <tr key={index}>
                             <td>{index + 1}</td>
-                            <td>{admin.name}</td>
-                            <td>{admin.position}</td>
-                            <td>{admin.office}</td>
-                            <td>{admin.age}</td>
-                            <td>{admin.startdate}</td>
-                            <td>${admin.salarey}</td>
+                            <td>{adminuser.name}</td>
+                            <td>{adminuser.position}</td>
+                            <td>{adminuser.office}</td>
+                            <td>{adminuser.age}</td>
+                            <td>{adminuser.startdate}</td>
+                            <td>${adminuser.salarey}</td>
+                            <td>{adminuser.status}</td>
                             <td>
-                                <Link to={`/Adminportal/Admins/${admin._id}`} className='btn btn-sm btn-warning mr-2'><FontAwesomeIcon icon={faEye}></FontAwesomeIcon> </Link>
-                                <Link  to={`/Adminportal/Admins/Edit/${admin._id}`} className='btn btn-sm btn-primary mr-2'><FontAwesomeIcon icon={faPenSquare}></FontAwesomeIcon> </Link>
-                                <button onClick={()=>{adminDelete(admin._id)}} className='btn btn-sm btn-danger mr-2'><FontAwesomeIcon icon={faTrashAlt}></FontAwesomeIcon> </button>
+                                <Link to={`/Portal/Users/${adminuser._id}`} className='btn btn-sm btn-warning mr-2'><FontAwesomeIcon icon={faEye}></FontAwesomeIcon> </Link>
+                                <Link  to={`/Adminportal/Adminuserprocess/Edit/${adminuser._id}`} className='btn btn-sm btn-primary mr-2'><FontAwesomeIcon icon={faPenSquare}></FontAwesomeIcon> </Link>
+                                {/* <button onClick={()=>{userDelete(adminuser._id)}} className='btn btn-sm btn-danger mr-2'><FontAwesomeIcon icon={faTrashAlt}></FontAwesomeIcon> </button> */}
                             </td>
                         </tr>
                                   )
@@ -126,4 +129,4 @@ const Admins = () => {
   )
 }
 
-export default Admins
+export default Adminuserprocess

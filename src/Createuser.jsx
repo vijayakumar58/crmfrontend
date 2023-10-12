@@ -14,7 +14,8 @@ const Createuser = () => {
             office: "",
             age: "",
             startdate: "",
-            salarey: ""
+            salarey: "",
+            status:"Pending",
         },
         validate: (values) => {
             let errors = {}

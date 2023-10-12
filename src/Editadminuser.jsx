@@ -1,11 +1,11 @@
-import axios from 'axios'
-import { useFormik } from 'formik'
+import { useFormik } from 'formik';
 import React, { useEffect } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
-import './App.css'
-import {env} from './config'
+import { useNavigate, useParams } from 'react-router-dom';
+import { env } from './config';
+import './App.css';
+import axios from 'axios';
 
-const Edituser = () => {
+const Editadminuser = () => {
     const params = useParams()
     const navigate = useNavigate()
     const formik = useFormik({
@@ -15,7 +15,8 @@ const Edituser = () => {
             office: "",
             age: "",
             startdate: "",
-            salarey: ""
+            salarey: "",
+            status:""
         },
         validate: (values) => {
             let errors = {}
@@ -37,28 +38,31 @@ const Edituser = () => {
             if (values.salarey === "") {
                 errors.salarey = "Please enter salarey"
             }
+            if (values.status === "pending") {
+                errors.status = "Please update status"
+            }
             return errors
         },
         onSubmit: async (values) => {
-            let user = await axios.put(
-                `${env.api}/user/${params.id}`, values,{
+            let adminuser = await axios.put(
+                `${env.api}/adminuser/${params.id}`, values,{
                     headers : {
                         'authorization' : window.localStorage.getItem("app-token")
                     }
                 }
                 )
-            alert("User Updated")
-            navigate ("/Portal/Users")
+            alert("AdminUser status Updated")
+            navigate ("/Adminportal/Adminuserprocess")
         }
     });
 
     useEffect(() => {
-      loadUser ()
+      loadAdminuser ()
     }, [])
 
-    let loadUser = async () => {
+    let loadAdminuser = async () => {
         try {
-           let user = await axios.get(
+           let adminuser = await axios.get(
             `${env.api}/user/${params.id}`,{
                 headers : {
                     'authorization' : window.localStorage.getItem("app-token")
@@ -66,12 +70,13 @@ const Edituser = () => {
             }
             )
            formik.setValues ({
-            name: user.data.name,
-            position: user.data.position,
-            office: user.data.office,
-            age: user.data.age,
-            startdate: user.data.startdate,
-            salarey: user.data.salarey
+            name: adminuser.data.name,
+            position: adminuser.data.position,
+            office: adminuser.data.office,
+            age: adminuser.data.age,
+            startdate: adminuser.data.startdate,
+            salarey: adminuser.data.salarey,
+            status: adminuser.data.status
            })
         }catch (error){
 
@@ -88,7 +93,7 @@ const Edituser = () => {
                 <div className="col-lg-8">
                     <div className="p-5">
                         <div className="text-center">
-                            <h1 className="h4 text-gray-900 mb-4">Edit an Account!</h1>
+                            <h1 className="h4 text-gray-900 mb-4">Updte to User Status!</h1>
                         </div>
                         <form className="user" onSubmit={formik.handleSubmit}>
                             <div className="form-group row">
@@ -133,6 +138,18 @@ const Edituser = () => {
                                     <span style={{ color: "red" }}>{formik.errors.salarey}</span>
                                 </div>
                             </div>
+                            <div className="form-group row">
+                                <div className="col-sm-6 mb-3 mb-sm-0">
+                                    <lable style={{ color: "black" }}>Status</lable>
+                                    <select className="form-control form-control-user"  id={`${formik.errors.status ? `input-error` :``}`} 
+                                        placeholder="Status" value={formik.values.status} onChange={formik.handleChange} name="status">
+                                        <option value="Pending">Pending</option>
+                                        <option value="Approved">Approved</option>
+                                        <option value="Reject">Reject</option>
+                                    </select>
+                                    <span style={{ color: "red" }}>{formik.errors.status}</span>
+                                </div>
+                            </div>
                             <input className="btn btn-primary btn-user btn-block" type={"submit"} value="Register Account" disabled={!formik.isValid} />
                         </form>
                     </div>
@@ -145,4 +162,4 @@ const Edituser = () => {
   )
 }
 
-export default Edituser
+export default Editadminuser

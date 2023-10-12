@@ -61,7 +61,7 @@ const Users = () => {
      
      <div className="card shadow mb-4">
          <div className="card-header py-3">
-             <h6 className="m-0 font-weight-bold text-primary">DataTables Example</h6>
+             <h6 className="m-0 font-weight-bold text-primary">User Data</h6>
          </div>
          <div className="card-body">
              <div className="table-responsive">
@@ -75,6 +75,7 @@ const Users = () => {
                              <th>Age</th>
                              <th>Start date</th>
                              <th>Salary</th>
+                             <th>Status</th>
                              <th>Action</th>
                          </tr>
                      </thead>
@@ -87,6 +88,7 @@ const Users = () => {
                              <th>Age</th>
                              <th>Start date</th>
                              <th>Salary</th>
+                             <th>Status</th>
                              <th>Action</th>
                          </tr>
                      </tfoot>
@@ -102,6 +104,7 @@ const Users = () => {
                              <td>{user.age}</td>
                              <td>{user.startdate}</td>
                              <td>${user.salarey}</td>
+                             <td>{user.status}</td>
                              <td>
                                  <Link to={`/Portal/Users/${user._id}`} className='btn btn-sm btn-warning mr-2'><FontAwesomeIcon icon={faEye}></FontAwesomeIcon> </Link>
                                  <Link  to={`/Portal/Users/Edit/${user._id}`} className='btn btn-sm btn-primary mr-2'><FontAwesomeIcon icon={faPenSquare}></FontAwesomeIcon> </Link>

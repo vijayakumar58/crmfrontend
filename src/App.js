@@ -14,9 +14,11 @@ import Createadminregister from './Createadminregister';
 import Adminportal from './Adminportal';
 import Admins from './Admins';
 import Adminview from './Adminview';
+import Adminuserprocess from './Adminuserprocess';
 import Editadmin from './Editadmin';
 import Createadmin from './Createadmin';
 import Mainpage from './Mainpage';
+import Editadminuser from './Editadminuser';
 
 function App() {
   return (
@@ -35,7 +37,8 @@ function App() {
       <Route path='/Adminlogin' element={<Adminlogin></Adminlogin>}></Route>
       <Route path='/Createadminregister' element={<Createadminregister></Createadminregister>}></Route>
       <Route path='/Adminportal' element={<Adminportal></Adminportal>}>
-        <Route path='Users' element={<Users></Users>}></Route>
+        <Route path='Adminuserprocess' element={<Adminuserprocess></Adminuserprocess>}></Route>
+        <Route path='Adminuserprocess/Edit/:id' element={<Editadminuser></Editadminuser>}></Route>
         <Route path='Admins' element={<Admins></Admins>}></Route>
         <Route path='Admins/:id' element={<Adminview></Adminview>}></Route>
         <Route path='Admins/Edit/:id' element={<Editadmin></Editadmin>}></Route>

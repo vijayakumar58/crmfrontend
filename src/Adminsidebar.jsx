@@ -19,7 +19,7 @@ const Adminsidebar = () => {
 
    {/* <!-- Nav Item - Dashboard --> */}
    <li className="nav-item active">
-       <Link className="nav-link" to="/Adminportal/Users">
+       <Link className="nav-link" to="/Adminportal/Adminuserprocess">
            <i className="fas fa-fw fa-tachometer-alt"></i>
            <span>Users</span>
        </Link>
